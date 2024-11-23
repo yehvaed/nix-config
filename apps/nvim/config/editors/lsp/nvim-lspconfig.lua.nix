@@ -38,8 +38,10 @@ local servers = {
   -- nix
   nixd = {
     cmd = { "${pkgs.nixd}/bin/nixd" },
-    filetypes = { "nix" },
   },
+  ts_ls = {
+    cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" },
+  }
 }
 
 for k, v in pairs(servers) do
