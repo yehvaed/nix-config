@@ -15,6 +15,9 @@
 				# ==> external modules to load
 				inputs.nix-config-modules.flakeModule
 			] 
+      ++ (getNixModulesFrom ./apps/clis)
+      ++ (getNixModulesFrom ./apps/guis)
+      ++ (getNixModulesFrom ./apps/misc)
       ++ (getNixModulesFrom ./apps)
       ++ (getNixModulesFrom ./hosts)
       ;
