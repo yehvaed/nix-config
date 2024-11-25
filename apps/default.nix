@@ -21,6 +21,7 @@
     eza = true;
     gh = true;
     devbox = true;
+    yazi = true;
   };
 
   nix-config.homeApps = [];
