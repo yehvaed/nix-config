@@ -15,4 +15,8 @@
 
     tags = [ "greetd" ];
   };
+  
+  nix-config.defaultTags = {
+    greetd = true;
+  }; 
 }

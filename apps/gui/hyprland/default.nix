@@ -22,4 +22,8 @@ in {
 
     tags = [ "hyprland" ];
   };
+  
+  nix-config.defaultTags = {
+    hyprland = true;
+  }; 
 }

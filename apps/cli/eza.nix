@@ -16,6 +16,10 @@
 
     tags = [ "eza" ];
   };
+  
+  nix-config.defaultTags = {
+    eza = true;
+  };
 }
 
 

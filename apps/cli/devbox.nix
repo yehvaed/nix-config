@@ -6,4 +6,8 @@
 
     tags = [ "devbox" ];
   };
+  
+  nix-config.defaultTags = {
+    devbox = true;
+  };
 }

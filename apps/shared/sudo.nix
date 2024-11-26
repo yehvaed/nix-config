@@ -7,4 +7,8 @@
 
     tags = [ "sudo" ];
   };
+  
+  nix-config.defaultTags = {
+    sudo = true;
+  };
 }

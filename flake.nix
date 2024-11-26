@@ -1,26 +1,22 @@
 {
 	description = "Nix custom config";
 	
-	outputs = {flake-parts, nixpkgs, ...}@inputs:
+	outputs = {flake-parts, ...}@inputs:
 	let
 		inherit (flake-parts.lib) mkFlake;
-    inherit (nixpkgs.lib) attrNames;
-    inherit (builtins) map readDir;
+		inherit (builtins) map readDir attrNames;
 
-    getNixModulesFrom = from:
-      map (module: from + "/${module}") (attrNames (readDir from));
+    mapToFlakeImports = path:
+      map (file: path + "/${file}") (attrNames (readDir path));
 
-		flakeModule = {
+    flakeModule = {
 			imports = [
-				# ==> external modules to load
 				inputs.nix-config-modules.flakeModule
-			] 
-      ++ (getNixModulesFrom ./apps/clis)
-      ++ (getNixModulesFrom ./apps/guis)
-      ++ (getNixModulesFrom ./apps/misc)
-      ++ (getNixModulesFrom ./apps)
-      ++ (getNixModulesFrom ./hosts)
-      ;
+      ]
+      ++ (mapToFlakeImports ./apps/cli)
+      ++ (mapToFlakeImports ./apps/gui)
+      ++ (mapToFlakeImports ./apps/shared)
+      ++ (mapToFlakeImports ./hosts);
 
 			systems = [];
 		};

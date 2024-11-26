@@ -37,4 +37,8 @@
 
 		tags = [ "zsh" ];
 	};
+  
+  nix-config.defaultTags = {
+    zsh = true;
+  };
 }

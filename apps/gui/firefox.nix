@@ -9,6 +9,10 @@
 
     tags = [ "firefox" ];
   };
+  
+  nix-config.defaultTags = {
+    firefox = true;
+  };
 }
 
 

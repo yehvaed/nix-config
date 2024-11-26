@@ -9,4 +9,8 @@
 
     tags = [ "yazi" ];
   };
+  
+  nix-config.defaultTags = {
+    yazi = true;
+  };
 }

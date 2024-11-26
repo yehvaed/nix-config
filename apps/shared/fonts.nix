@@ -15,4 +15,8 @@
 
     tags = [ "fonts" ];
   };
+  
+  nix-config.defaultTags = {
+    fonts = true;
+  }; 
 }

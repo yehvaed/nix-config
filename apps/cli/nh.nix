@@ -7,12 +7,14 @@
           extraArgs = "--keep 5 --keep-since 3d";
         };
 
-        flake = "${builtins.getEnv "HOME"}/.local/nix";
-
         enable = true;
       };
     };
 
     tags = [ "nh" ];
+  };
+  
+  nix-config.defaultTags = {
+    nh = true;
   };
 }

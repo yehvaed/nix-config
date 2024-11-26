@@ -7,4 +7,8 @@
     };
     tags = [ "gh" ];
   };
+  
+  nix-config.defaultTags = {
+    gh = true;
+  };
 }

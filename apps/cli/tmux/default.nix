@@ -17,4 +17,9 @@
 
     tags = [ "tmux" ];
   };
+  
+  nix-config.defaultTags = {
+    tmux = true;
+  };
+
 }

@@ -18,4 +18,8 @@
 
     tags = [ "kitty" ];
   };
+  
+  nix-config.defaultTags = {
+    kitty = true;
+  }; 
 }

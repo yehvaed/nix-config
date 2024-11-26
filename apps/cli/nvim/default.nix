@@ -77,5 +77,9 @@ extend = f: { pkgs, lib, ... }@inputs: f {
   inherit lib;
 };
 
+module = {
+  enable = true;
+};
+
 in
-import ./nvim.nix (inputs // { inherit extend; }) 
+import ./nvim.nix (inputs // { inherit extend; } // module ) 

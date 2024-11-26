@@ -42,4 +42,6 @@ in {
 
 		tags = [ "nvim" ];
 	};
+
+  nix-config.defaultTags.nvim = true;
 }
