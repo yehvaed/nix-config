@@ -25,11 +25,16 @@
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 		nix-config-modules.url = "github:chadac/nix-config-modules";
+		flake-parts.url = "github:hercules-ci/flake-parts";
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";   
 		home-manager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		flake-parts.url = "github:hercules-ci/flake-parts";
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
+    posting = {
+      url = "github:justDeeevin/posting?ref=flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 	};
 }
