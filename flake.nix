@@ -1,44 +1,24 @@
 {
-	description = "Nix custom config";
-	
-	outputs = {flake-parts, ...}@inputs:
-	let
-		inherit (flake-parts.lib) mkFlake;
-		inherit (builtins) map readDir attrNames;
+  description = "Nix custom config";
 
-    mapToFlakeImports = path:
-      map (file: path + "/${file}") (attrNames (readDir path));
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nix-std.url = "github:chessai/nix-std";
+    nix-config-modules.url = "github:chadac/nix-config-modules";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    flakeModule = {
-			imports = [
-				inputs.nix-config-modules.flakeModule
-      ]
-      ++ (mapToFlakeImports ./apps/cli)
-      ++ (mapToFlakeImports ./apps/gui)
-      ++ (mapToFlakeImports ./apps/shared)
-      ++ (mapToFlakeImports ./hosts);
-
-      nix-config.modules.nixos = [ inputs.nixos-wsl.nixosModules.wsl ];
-
-			systems = [];
-		};
-	in (mkFlake { inherit inputs; } flakeModule) // { inherit flakeModule; };
-	
-	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-		nix-config-modules.url = "github:chadac/nix-config-modules";
-		flake-parts.url = "github:hercules-ci/flake-parts";
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";   
-	  nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-		
     home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     posting = {
       url = "github:justDeeevin/posting?ref=flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = inputs: import ./nix-config inputs;
 }
