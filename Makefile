@@ -1,4 +1,3 @@
-
 .PHONY: build
 build:
 	nh os build . -- --impure
