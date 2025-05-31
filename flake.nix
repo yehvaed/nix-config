@@ -38,7 +38,7 @@
 
       flakeModule = {
         imports = [ inputs.nix-config-modules.flakeModule ]
-          ++ (importAll ./nix-config/apps) ++ (importAll ./nix-config/hosts);
+          ++ (importAll ./apps) ++ (importAll ./hosts);
 
         systems = [ ];
       };

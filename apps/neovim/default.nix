@@ -1,8 +1,12 @@
 {
   nix-config.apps.neovim = {
-    home = { pkgs, ... }@inputs: {
+    home = { config, pkgs, ... }@inputs: 
+    let 
+      inherit (config.home) homeDirectory;
+      inherit (config.lib.file) mkOutOfStoreSymlink;
+    in {
       programs.neovim = {
-        plugins = (import ./plugins/loader.nix inputs) (with pkgs.vimPlugins; [
+        plugins = with pkgs.vimPlugins; [
           # ==> @editor/lsp
           nvim-cmp
           nvim-lspconfig
@@ -25,25 +29,23 @@
 
           # ==> @tools
           neorg
-        ]);
-
-        extraConfig = ''
-          let mapleader = " "
-          set tabstop=2 softtabstop=2
-          set shiftwidth=2
-          set expandtab
-          set smartindent
-          set number
-        '';
+        ];
 
         viAlias = true;
         vimAlias = true;
 
         enable = true;
       };
+
+      home.file.".config/nvim".source = 
+        mkOutOfStoreSymlink "${homeDirectory}/.local/etc/nixos/apps/neovim";
     };
 
-    nixos = { environment.variables = { EDITOR = "nvim"; }; };
+    nixos = { 
+      environment.variables = { 
+        EDITOR = "nvim"; 
+      }; 
+    };
 
     tags = [ "dev" ];
   };
