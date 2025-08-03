@@ -4,7 +4,5 @@
 
     tags = [ "tl" ];
   };
-
-  nix-config.defaultTags.tl = false;
 }
 

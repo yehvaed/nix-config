@@ -1,48 +1,17 @@
 { lib, ... }: {
   nix-config.hosts.mthrshp = rec {
-    nixos = { pkgs, ... }: {
-      imports = [ 
-         ./hardware-configuration.nix
-      ];
-
-      services = {
-        desktopManager.plasma6.enable = true;
-        displayManager.sddm.enable = true;
-        displayManager.sddm.wayland.enable = true;
-      };
-
-      users.users.${username} = {
-        isNormalUser = true;
-
-        home = "/home/${username}";
-        extraGroups = [ "wheel" "networkmanager" ];
-      };
-
-      # Use the systemd-boot EFI boot loader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-
-      networking.networkmanager.enable = true;
-
-      # Set your time zone.
-      time.timeZone = "Europe/Warsaw";
-
-      # users.users.${username}.shell = pkgs.zsh;
-      programs.zsh.enable = true;
-
-      networking.hostName = lib.mkForce "mthrshp";
-
-      system.stateVersion = "24.05";
-    };
-
-    home = { pkgs, ...}: {
-      home.stateVersion = "24.05";
-    };
+    nixos = import ./nixos/configuration.nix;
+    home = import ./nixos/home.nix;
 
     tags = {
-      tl = true;
+      cntr = true;
       nix = true;
       scm = true;
+      tl = true;
+    };
+
+    nix-config = {
+      apps.kde.enable = true;
     };
 
     kind = "nixos";
@@ -50,7 +19,5 @@
 
     username = "yehvaed";
     homeDirectory = "/home/${username}";
-
-
   };
 }

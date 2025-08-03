@@ -4,6 +4,4 @@
 
     tags = [ "cntr" ]; 
   };
-
-  nix-config.defaultTags.cntr = false;
 }

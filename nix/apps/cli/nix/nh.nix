@@ -13,6 +13,4 @@
 
     tags = [ "nix" ];
   };
-
-  nix-config.defaultTags.nix = false;
 }
