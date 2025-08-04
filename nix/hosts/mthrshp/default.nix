@@ -50,6 +50,7 @@ in
 
         # ==> misc
         nerd-fonts = true;
+        displaylink = true;
 
         # ==> default apps
         default = true;

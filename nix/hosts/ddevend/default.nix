@@ -49,7 +49,6 @@ in
         docker = true;
         vscode = true;
         distros = true;
-        nvf = true;
 
         # ==> scm tools
         github = true;
