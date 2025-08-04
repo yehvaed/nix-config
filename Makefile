@@ -1,3 +1,5 @@
+FILES ?= **/*.nix
+
 .PHONY: build switch clean format
 
 define print_banner
@@ -28,5 +30,4 @@ clean:
 ################################################################################
 
 format:
-	@FILES="${FILES:-$$(find . -name '*.nix')}" && \
-	nixfmt $$FILES
+	nixfmt $(FILES)

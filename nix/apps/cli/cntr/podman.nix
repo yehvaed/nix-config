@@ -3,6 +3,7 @@
     nixos =
       { pkgs, ... }:
       {
+
         virtualisation = {
           containers.enable = true;
 
@@ -16,6 +17,10 @@
         };
 
         environment.systemPackages = with pkgs; [ docker-compose ];
+
+        environment.variables = {
+          PODMAN_IGNORE_CGROUPSV1_WARNING = "1";
+        };
       };
 
     tags = [

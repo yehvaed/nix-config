@@ -1,7 +1,7 @@
 pre-commit:
   parallel: true
   commands:
-    nixfmt:
+    formatting:
       glob: "*.nix"
       run: |
         make format FILES="{staged_files}"
@@ -9,7 +9,6 @@ pre-commit:
 
 pre-push:
   commands:
-    ensure-build:
+    build:
       run: |
-        echo "🔨 Running 'make build' to validate configuration before push..."
         make build
