@@ -47,6 +47,9 @@ in
         # ==> scm tools
         github = true;
 
+        # ==> misc
+        nerd-fonts = true;
+
         # ==> default apps
         default = true;
 
