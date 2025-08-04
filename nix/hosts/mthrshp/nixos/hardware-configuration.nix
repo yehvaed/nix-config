@@ -10,7 +10,10 @@
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [ 
+    (modulesPath + "/installer/scan/not-detected.nix") 
+    ../../../hardware/lenovo-thinkbook-16-g4-iap.nix  
+  ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
