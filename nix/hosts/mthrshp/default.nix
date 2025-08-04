@@ -1,5 +1,6 @@
 { lib, ... }: let
 host = "mthrshp";
+user = "yehvaed";
 
 in {
   nix-config = {
@@ -15,14 +16,23 @@ in {
 
           tags = [ "${host}" ]; 
       };
+
+      "${host}@zsh" = {
+          nixos = { pkgs, ... }: {
+            users.users.${user}.shell = pkgs.zsh;
+            programs.zsh.enable = true;
+          };
+
+          tags = [ "${host}" ]; 
+      };
     };
 
-    hosts.${host} = rec {
+    hosts.${host} = {
       kind = "nixos";
       system = "x86_64-linux";
 
-      username = "yehvaed";
-      homeDirectory = "/home/${username}";
+      username = user;
+      homeDirectory = "/home/${user}";
 
       tags = {
         cntr = true;
