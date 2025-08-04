@@ -4,5 +4,12 @@ pre-commit:
     nixfmt:
       glob: "*.nix"
       run: |
-        nixfmt {staged_files}
+        make format FILES="{staged_files}"
         git add {staged_files}
+
+pre-push:
+  commands:
+    ensure-build:
+      run: |
+        echo "🔨 Running 'make build' to validate configuration before push..."
+        make build
