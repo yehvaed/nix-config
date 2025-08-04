@@ -16,25 +16,30 @@
   outputs =
     { flake-parts, nixpkgs, ... }@inputs:
     let
-      inherit (nixpkgs) lib;
-
-      autoload = import ./nix/autoload.nix { inherit lib inputs nixpkgs; };
-
       # perSystem definition separated for clarity
       perSystem =
         { pkgs, system, ... }:
         {
           devShells.default = pkgs.mkShell {
             name = "nix-config";
-            buildInputs = [
-              pkgs.nixfmt-rfc-style
-              pkgs.gnumake
+            buildInputs = with pkgs; [
+              nixfmt-rfc-style
+              lefthook
+
+              gnumake
             ];
             shellHook = ''
               echo "🛠️ Welcome to the nix-config on ${system}"
+              if [ -d .git ] && [ ! -f .lefthook.yml ]; then
+                lefthook install
+              fi
             '';
           };
         };
+
+      inherit (nixpkgs) lib;
+
+      autoload = import ./nix/autoload.nix { inherit lib inputs nixpkgs; };
 
       flakeBody = {
         systems = [ "x86_64-linux" ];
