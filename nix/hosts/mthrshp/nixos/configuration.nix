@@ -1,5 +1,12 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -7,20 +14,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
-    
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
   networking.hostName = lib.mkForce "mthrshp";
   time.timeZone = "Europe/Warsaw";
-
 
   users.users.yehvaed = {
     isNormalUser = true;
 
     home = "/home/yehvaed";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
   };
-
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

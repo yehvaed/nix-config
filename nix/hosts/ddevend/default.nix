@@ -1,33 +1,39 @@
-{ inputs, lib, ... }: let
-host = "ddevend";
-user = "nixos";
+{ inputs, lib, ... }:
+let
+  host = "ddevend";
+  user = "nixos";
 
-in {
+in
+{
   nix-config = {
     apps = {
-       "${host}@git" = {
-          home = { pkgs, ... }: {
+      "${host}@git" = {
+        home =
+          { pkgs, ... }:
+          {
             programs.git = {
               extraConfig = {
                 credential = {
                   helper = "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe";
                 };
+              };
+
+              enable = true;
             };
-            
-            enable = true;
           };
-        };
-        
-          tags = [ "${host}" ]; 
+
+        tags = [ "${host}" ];
       };
 
       "${host}@zsh" = {
-          nixos = { pkgs, ... }: {
+        nixos =
+          { pkgs, ... }:
+          {
             users.users.${user}.shell = pkgs.zsh;
             programs.zsh.enable = true;
           };
 
-          tags = [ "${host}" ]; 
+        tags = [ "${host}" ];
       };
     };
 
@@ -56,4 +62,3 @@ in {
     modules.nixos = [ inputs.nixos-wsl.nixosModules.wsl ];
   };
 }
-

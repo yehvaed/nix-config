@@ -1,29 +1,33 @@
-{ lib, ... }: let
-host = "mthrshp";
-user = "yehvaed";
+{ lib, ... }:
+let
+  host = "mthrshp";
+  user = "yehvaed";
 
-in {
+in
+{
   nix-config = {
     apps = {
       "${host}@kde" = {
-          nixos = {
-            services = {
-              desktopManager.plasma6.enable = true;
-              displayManager.sddm.enable = true;
-              displayManager.sddm.wayland.enable = true;
-            };
+        nixos = {
+          services = {
+            desktopManager.plasma6.enable = true;
+            displayManager.sddm.enable = true;
+            displayManager.sddm.wayland.enable = true;
           };
+        };
 
-          tags = [ "${host}" ]; 
+        tags = [ "${host}" ];
       };
 
       "${host}@zsh" = {
-          nixos = { pkgs, ... }: {
+        nixos =
+          { pkgs, ... }:
+          {
             users.users.${user}.shell = pkgs.zsh;
             programs.zsh.enable = true;
           };
 
-          tags = [ "${host}" ]; 
+        tags = [ "${host}" ];
       };
     };
 

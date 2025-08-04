@@ -1,6 +1,13 @@
-{ ... }: {
+{ ... }:
+{
   nix-config.apps.git = {
-    home = { ... }: { programs.git = { enable = true; }; };
+    home =
+      { ... }:
+      {
+        programs.git = {
+          enable = true;
+        };
+      };
     tags = [ "scm" ];
   };
 }

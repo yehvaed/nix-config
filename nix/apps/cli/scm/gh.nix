@@ -1,6 +1,11 @@
-{ ... }: {
+{ ... }:
+{
   nix-config.apps.gh = {
-    home = { programs.gh = { enable = true; }; };
+    home = {
+      programs.gh = {
+        enable = true;
+      };
+    };
     tags = [ "scm" ];
   };
 }

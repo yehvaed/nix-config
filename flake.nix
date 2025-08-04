@@ -13,32 +13,35 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { flake-parts, nixpkgs, ... }@inputs:
+  outputs =
+    { flake-parts, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs) lib;
 
       autoload = import ./nix/autoload.nix { inherit lib inputs nixpkgs; };
 
       # perSystem definition separated for clarity
-      perSystem = { pkgs, system, ... }: {
-        devShells.default = pkgs.mkShell {
-          name = "nix-config";
-          buildInputs = [ 
-            pkgs.nixfmt-rfc-style  
-            pkgs.gnumake 
-          ];
-          shellHook = ''
-            echo "🛠️ Welcome to the nix-config on ${system}"
-          '';
+      perSystem =
+        { pkgs, system, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            name = "nix-config";
+            buildInputs = [
+              pkgs.nixfmt-rfc-style
+              pkgs.gnumake
+            ];
+            shellHook = ''
+              echo "🛠️ Welcome to the nix-config on ${system}"
+            '';
+          };
         };
-      };
 
       flakeBody = {
         systems = [ "x86_64-linux" ];
 
         imports = [ inputs.nix-config-modules.flakeModule ] ++ autoload.importPaths;
 
-        nix-config.homeApps = [];
+        nix-config.homeApps = [ ];
         nix-config.defaultTags = autoload.tags;
 
         inherit perSystem;

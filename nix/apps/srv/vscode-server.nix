@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   nix-config.apps.vscode-server = {
     nixos = {
       services.vscode-server.enable = true;
@@ -12,4 +13,3 @@
     modules.nixos = [ inputs.vscode-server.nixosModules.default ];
   };
 }
-

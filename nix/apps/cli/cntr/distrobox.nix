@@ -1,7 +1,11 @@
 {
   nix-config.apps.distrobox = {
-    home = { programs.distrobox = { enable = true; }; };
+    home = {
+      programs.distrobox = {
+        enable = true;
+      };
+    };
 
-    tags = [ "cntr" ]; 
+    tags = [ "cntr" ];
   };
 }
