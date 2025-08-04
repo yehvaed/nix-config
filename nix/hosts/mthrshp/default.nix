@@ -35,6 +35,8 @@ in {
       homeDirectory = "/home/${user}";
 
       tags = {
+        "@mux" = true;
+        "@sh" = true;
         cntr = true;
         nix = true;
         scm = true;
