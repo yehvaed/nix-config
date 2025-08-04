@@ -43,6 +43,7 @@ in {
         nix = true;
         scm = true;
         tl = true;
+        wsl = true;
         ${host} = true;
       };
 

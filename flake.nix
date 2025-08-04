@@ -9,6 +9,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
