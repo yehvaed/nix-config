@@ -28,7 +28,7 @@
       {
 
         environment.systemPackages = [ myDisplaylink ];
-=
+
         services.xserver.videoDrivers = [
           "displaylink"
           "modesetting"
