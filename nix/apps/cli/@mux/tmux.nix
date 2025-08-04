@@ -45,6 +45,9 @@
         };
       };
 
-    tags = [ "@mux" ];
+    tags = [
+      "@mux"
+      "default"
+    ];
   };
 }

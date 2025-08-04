@@ -8,6 +8,9 @@
           enable = true;
         };
       };
-    tags = [ "scm" ];
+    tags = [
+      "scm"
+      "github"
+    ];
   };
 }

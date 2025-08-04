@@ -6,6 +6,9 @@
       };
     };
 
-    tags = [ "cntr" ];
+    tags = [
+      "cntr"
+      "distros"
+    ];
   };
 }

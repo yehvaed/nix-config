@@ -7,7 +7,10 @@
         programs.nix-index-database.comma.enable = true;
       };
 
-    tags = [ "nix" ];
+    tags = [
+      "nix"
+      "default"
+    ];
   };
 
   nix-config = {

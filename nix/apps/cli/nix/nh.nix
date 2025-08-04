@@ -11,6 +11,9 @@
       };
     };
 
-    tags = [ "nix" ];
+    tags = [
+      "nix"
+      "default"
+    ];
   };
 }

@@ -45,13 +45,18 @@ in
       homeDirectory = "/home/${user}";
 
       tags = {
-        "@mux" = true;
-        "@sh" = true;
-        cntr = true;
-        nix = true;
-        scm = true;
-        tl = true;
-        wsl = true;
+        # ==> development tools
+        docker = true;
+        vscode = true;
+        distros = true;
+
+        # ==> scm tools
+        github = true;
+
+        # ==> default apps
+        default = true;
+
+        # ==> host specific overrides
         ${host} = true;
       };
 

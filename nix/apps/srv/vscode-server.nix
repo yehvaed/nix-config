@@ -6,7 +6,7 @@
       services.vscode-server.enableFHS = true;
     };
 
-    tags = [ "wsl" ];
+    tags = [ "vscode" ];
   };
 
   nix-config = {

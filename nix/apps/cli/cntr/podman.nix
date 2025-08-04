@@ -18,6 +18,9 @@
         environment.systemPackages = with pkgs; [ docker-compose ];
       };
 
-    tags = [ "cntr" ];
+    tags = [
+      "cntr"
+      "docker"
+    ];
   };
 }

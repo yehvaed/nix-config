@@ -12,6 +12,9 @@
       };
     };
 
-    tags = [ "tl" ];
+    tags = [
+      "tl"
+      "default"
+    ];
   };
 }

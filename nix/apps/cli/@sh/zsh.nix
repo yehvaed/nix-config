@@ -50,6 +50,9 @@
         };
       };
 
-    tags = [ "@sh" ];
+    tags = [
+      "@sh"
+      "default"
+    ];
   };
 }
