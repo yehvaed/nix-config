@@ -1,4 +1,7 @@
-.PHONY: build switch clean
+.PHONY: develop build switch clean
+
+develop:
+	nix develop --command 'zsh' || true
 
 build:
 	@nh os build $(if $(HOSTNAME),-H $(HOSTNAME)) .

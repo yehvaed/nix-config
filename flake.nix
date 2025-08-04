@@ -26,14 +26,15 @@
               nixfmt-rfc-style
               lefthook
               gnumake
+              zsh
             ];
 
             shellHook = ''
-              echo "🛠️ Welcome to the nix-config on ${system}"
-              if [ -d .git ] && [ ! -f .lefthook.yml ]; then
+              # Run lefthook install only once per shell session
+              if [[ -d .git &&  -f .lefthook.yml && -z "$_LEFTHOOK_INSTALLED" ]]; then
+                export _LEFTHOOK_INSTALLED=1
                 lefthook install
               fi
-              exec ${pkgs.zsh}/bin/zsh
             '';
           };
         };
