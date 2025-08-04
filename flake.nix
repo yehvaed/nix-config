@@ -25,14 +25,15 @@
             buildInputs = with pkgs; [
               nixfmt-rfc-style
               lefthook
-
               gnumake
             ];
+
             shellHook = ''
               echo "🛠️ Welcome to the nix-config on ${system}"
               if [ -d .git ] && [ ! -f .lefthook.yml ]; then
                 lefthook install
               fi
+              exec ${pkgs.zsh}/bin/zsh
             '';
           };
         };
