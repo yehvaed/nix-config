@@ -40,9 +40,10 @@ in
 
       tags = {
         # ==> development tools
+        devbox = true;
         docker = true;
-        vscode = true;
         distros = true;
+        vscode = true;
         nvf = true;
 
         # ==> scm tools
