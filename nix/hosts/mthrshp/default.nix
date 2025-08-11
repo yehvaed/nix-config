@@ -43,8 +43,9 @@ in
         devbox = true;
         docker = true;
         distros = true;
-        vscode = true;
-        nvf = true;
+        
+        "@ed" = true;
+        nvim = true;
 
         # ==> scm tools
         github = true;

@@ -4,11 +4,5 @@ pre-commit:
     formatting:
       glob: "*.nix"
       run: |
-        make format FILES="{staged_files}"
+        make fmt FILES="{staged_files}"
         git add {staged_files}
-
-pre-push:
-  commands:
-    build:
-      run: |
-        make build

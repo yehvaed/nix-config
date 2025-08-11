@@ -32,6 +32,10 @@ in
       "nvim"
       "nvf"
     ];
+
+    enablePredicate = { host, ... }:
+      host.tags."@ed" && host.tags.nvim;
+
   };
 
   nix-config.modules.home-manager = [

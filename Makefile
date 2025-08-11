@@ -1,33 +1,46 @@
+# Define the files to be formatted
 FILES ?= **/*.nix
 
-.PHONY: build switch clean format
-
+# Macro to print a banner for command output
 define print_banner
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "> $(1)"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo ""
+    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    @echo "> $(1)"
+    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    @echo ""
 endef
 
 ################################################################################
 # 🚀 System Deployment Commands
 ################################################################################
 
-build:
-	$(call print_banner,🔨 Building system configuration...)
-	@nh os build $(if $(HOSTNAME),-H $(HOSTNAME)) .
+# Define the flake target. By default, it uses the current directory's flake
+# and the hostname as the attribute (e.g., .#my-hostname).
+# You can override this on the command line, for example:
+# make apply FLAKE_TARGET="github:NixOS/nixpkgs/nixos-unstable"
+FLAKE_TARGET ?= .$(if $(HOSTNAME),#$(HOSTNAME))
 
-switch:
-	$(call print_banner,⚡ Applying system configuration...)
-	@nh os switch $(if $(HOSTNAME),-H $(HOSTNAME)) .
+# Apply the system configuration, similar to `nixos-rebuild switch`
+apply:
+	$(call print_banner,⚡ Applying system configuration to $(FLAKE_TARGET)...)
+	@nixos apply -y $(FLAKE_TARGET)
 
+# Build a new configuration but don't activate it. It will be applied on the next reboot.
+boot:
+	$(call print_banner,🚀 Building configuration for next boot for $(FLAKE_TARGET)...)
+	@nixos apply --no-activate -y $(FLAKE_TARGET)
+
+# Clean up old system generations, keeping the last 3 and anything newer than 120 hours.
 clean:
 	$(call print_banner,🧹 Cleaning up old generations...)
-	@nh clean all --keep 3 --keep-since 120h
+	@nixos generation delete --min 3 --older-than 120h -y
 
 ################################################################################
 # 🎨 Code Formatting Commands
 ################################################################################
 
-format:
+# Format Nix files with nixfmt
+fmt:
 	@nixfmt $(FILES)
+
+# Define all phony targets in a single, standard declaration
+.PHONY: apply boot clean fmt
