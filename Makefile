@@ -24,6 +24,12 @@ apply:
 	$(call print_banner,⚡ Applying system configuration to $(FLAKE_TARGET)...)
 	@nixos apply -y $(FLAKE_TARGET)
 
+# Build a system closure without activating it, and create a symlink to it in the current directory.
+# This is equivalent to `nixos-rebuild build`.
+build:
+	$(call print_banner,⚙️ Building configuration to ./result for $(FLAKE_TARGET)...)
+	@nixos apply --no-boot --no-activate --output ./result $(FLAKE_TARGET)
+
 # Build a new configuration but don't activate it. It will be applied on the next reboot.
 boot:
 	$(call print_banner,🚀 Building configuration for next boot for $(FLAKE_TARGET)...)
@@ -43,4 +49,4 @@ fmt:
 	@nixfmt $(FILES)
 
 # Define all phony targets in a single, standard declaration
-.PHONY: apply boot clean fmt
+.PHONY: apply build boot clean fmt

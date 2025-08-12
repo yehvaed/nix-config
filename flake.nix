@@ -43,7 +43,7 @@
 
       inherit (nixpkgs) lib;
 
-      autoload = import ./nix/autoload.nix { inherit lib inputs nixpkgs; };
+      autoload = import ./. { inherit lib inputs nixpkgs; };
 
       flakeBody = {
         systems = [ "x86_64-linux" ];
